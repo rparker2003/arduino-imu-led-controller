@@ -43,20 +43,18 @@ When the bike reaches a wheelie angle, the wheelie light automatically turns on.
 
 1. Install PlatformIO Core:
    - `pip install platformio`
-2. From the repository root, move into the firmware folder:
-   - `cd wheelie-light`
-3. Build:
+2. Build:
    - `pio run`
-4. Upload:
+3. Upload:
    - `pio run -t upload`
-5. Open serial monitor:
+4. Open serial monitor:
    - `pio device monitor -b 115200`
 
 `platformio.ini` is configured for Arduino Pro Micro 5V/16MHz (`sparkfun_promicro16`).
 
 ## Configuration
 
-Edit `wheelie-light/src/config.h`:
+Edit `src/config.h`:
 
 - `DEBUG` (enable/disable serial logging at compile time)
 - `kLightPin`
@@ -78,19 +76,18 @@ Use `LOG(value)` from `logger.h`.
 ## Architecture
 
 ```text
-wheelie-light/
-├── README.md
-├── src/
-│   ├── WheelieLight.ino
-│   ├── config.h
-│   ├── imu.h
-│   ├── imu.cpp
-│   ├── calibration.cpp
-│   ├── light.h
-│   ├── light.cpp
-│   └── logger.h
-├── docs/
-└── lib/
+docs/
+lib/
+src/
+├── WheelieLight.ino
+├── config.h
+├── imu.h
+├── imu.cpp
+├── calibration.cpp
+├── light.h
+├── light.cpp
+└── logger.h
+README.md
 ```
 
 The main sketch remains small and orchestration-focused, with IMU handling and light logic separated into modules.
@@ -101,11 +98,11 @@ CI build is defined in:
 
 - `.github/workflows/platformio-ci.yml`
 
-It installs PlatformIO and runs `pio run` inside `wheelie-light` on each push and pull request.
+It installs PlatformIO and runs `pio run` on each push and pull request.
 
 ## PlatformIO Compatibility Notes
 
-- `platformio.ini` was added in `wheelie-light/` so PlatformIO uses the existing `src/` directory without reorganizing modules.
+- `platformio.ini` was added so PlatformIO uses the existing `src/` directory without reorganizing modules.
 - `MPU6050_tockn` is declared in `lib_deps` for reproducible dependency resolution in PlatformIO.
 - No behavior changes were made to firmware logic during migration; this change is build-system and CI focused.
 
