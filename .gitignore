@@ -1,0 +1,6 @@
+# PlatformIO
+**/.pio/
+**/.vscode/
+
+# Python cache (PlatformIO tooling)
+__pycache__/

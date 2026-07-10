@@ -1,2 +1,10 @@
 # arduino-imu-led-controller
-Arduino code for an IMU logic circuit that activates the LED when above a certain angle
+
+The firmware project is located at:
+
+- `/home/runner/work/arduino-imu-led-controller/arduino-imu-led-controller/wheelie-light`
+
+Build with PlatformIO:
+
+- `cd /home/runner/work/arduino-imu-led-controller/arduino-imu-led-controller/wheelie-light`
+- `pio run`
