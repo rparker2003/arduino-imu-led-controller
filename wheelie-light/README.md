@@ -106,7 +106,8 @@ It installs PlatformIO and runs `pio run` inside `wheelie-light` on each push an
 ## PlatformIO Compatibility Notes
 
 - `platformio.ini` was added in `wheelie-light/` so PlatformIO uses the existing `src/` directory without reorganizing modules.
-- `MPU6050_tockn` is declared in `lib_deps` to make dependency resolution reproducible for future IMU implementation changes, while current firmware remains functionally unchanged.
+- `MPU6050_tockn` is declared in `lib_deps` for reproducible dependency resolution in PlatformIO.
+- No behavior changes were made to firmware logic during migration; this change is build-system and CI focused.
 
 ## Future Improvements
 
