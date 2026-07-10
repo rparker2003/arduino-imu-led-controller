@@ -39,16 +39,20 @@ When the bike reaches a wheelie angle, the wheelie light automatically turns on.
 - Turn light **ON** at `>= 30°`.
 - Turn light **OFF** at `<= 10°`.
 
-## Build Instructions
+## PlatformIO Setup
 
-Use the Arduino IDE:
+1. Install PlatformIO Core:
+   - `pip install platformio`
+2. From the repository root, move into the firmware folder:
+   - `cd wheelie-light`
+3. Build:
+   - `pio run`
+4. Upload:
+   - `pio run -t upload`
+5. Open serial monitor:
+   - `pio device monitor -b 115200`
 
-1. Open `wheelie-light/src/WheelieLight.ino`.
-2. Select board: **Arduino Leonardo / Pro Micro compatible ATmega32U4 target**.
-3. Select the correct COM port.
-4. Compile and upload.
-
-This project intentionally avoids extra third-party libraries by using `Wire` directly for MPU6050 register reads.
+`platformio.ini` is configured for Arduino Pro Micro 5V/16MHz (`sparkfun_promicro16`).
 
 ## Configuration
 
@@ -61,6 +65,8 @@ Edit `wheelie-light/src/config.h`:
 - `kCalibrationDurationMs`
 - `kCalibrationSampleDelayMs`
 - `kLoopIntervalMs`
+
+You can also override `DEBUG` in PlatformIO build flags (`platformio.ini`).
 
 ## Logging
 
@@ -88,6 +94,19 @@ wheelie-light/
 ```
 
 The main sketch remains small and orchestration-focused, with IMU handling and light logic separated into modules.
+
+## CI / GitHub Actions
+
+CI build is defined in:
+
+- `.github/workflows/platformio-ci.yml`
+
+It installs PlatformIO and runs `pio run` inside `wheelie-light` on each push and pull request.
+
+## PlatformIO Compatibility Notes
+
+- `platformio.ini` was added in `wheelie-light/` so PlatformIO uses the existing `src/` directory without reorganizing modules.
+- `MPU6050_tockn` is declared in `lib_deps` to make dependency resolution reproducible for future IMU implementation changes, while current firmware remains functionally unchanged.
 
 ## Future Improvements
 
